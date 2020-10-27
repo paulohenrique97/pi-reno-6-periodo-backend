@@ -1,0 +1,25 @@
+{
+    "name": "pi-reno-6-periodo-backend",
+    "version": "1.0.0",
+    "description": "Pi de Sistemas Distribuidos",
+    "repository": {
+        "url": "https://github.com/paulopatine/pi-reno-6-periodo-backend.git"
+    },
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "author": "Paulo Henrique Mendes Vieira (paulopatine)",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "sequelize": "^6.3.5",
+        "tedious": "^9.2.1"
+    }
+}
