@@ -27,8 +27,14 @@ class DefaultController {
                         .scope(scope)
                         .findByPk(id)
                         .then((data) => {
-                            if (!data) return res.status(404).end();
-                            res.status(200).send(data).json();
+                            if (!data) {
+                                res.status(404).end();
+                                return;
+                            }
+                            res.status(200).json(data);
+                        })
+                        .catch((error) => {
+                            res.status(500).json(error);
                         });
                     return;
                 }
@@ -40,7 +46,10 @@ class DefaultController {
                         offset: query.offset ? parseInt(query.offset) : null,
                     })
                     .then((data) => {
-                        if (!data) return res.status(404).end();
+                        if (!data) {
+                            res.status(404).end();
+                            return;
+                        }
                         let registers = {
                             count: 0,
                             rows: data,
@@ -51,11 +60,18 @@ class DefaultController {
                             })
                             .then((count) => {
                                 registers.count = count;
-                                return res.status(200).send(registers).json();
+                                res.status(200).json(registers);
+                                return;
+                            })
+                            .catch((error) => {
+                                res.status(500).json(error);
                             });
+                    })
+                    .catch((error) => {
+                        res.status(500).json(error);
                     });
             } catch (error) {
-                res.status(500).send(error);
+                res.status(500).json(error);
             }
         };
 
@@ -68,11 +84,16 @@ class DefaultController {
             try {
                 let body = req.body;
 
-                model.create(body).then(() => {
-                    res.status(201).end();
-                });
+                model
+                    .create(body)
+                    .then(() => {
+                        res.status(201).end();
+                    })
+                    .catch((error) => {
+                        res.status(500).json(error);
+                    });
             } catch (error) {
-                res.status(500).send(error);
+                res.status(500).json(error);
             }
         };
 
@@ -94,9 +115,12 @@ class DefaultController {
                     })
                     .then(() => {
                         res.status(200).end();
+                    })
+                    .catch((error) => {
+                        res.status(500).json(error);
                     });
             } catch (error) {
-                res.status(500).send(error);
+                res.status(500).json(error);
             }
         };
 
@@ -120,9 +144,12 @@ class DefaultController {
                     })
                     .then(() => {
                         res.status(200).end();
+                    })
+                    .catch((error) => {
+                        res.status(500).json(error);
                     });
             } catch (error) {
-                res.status(500).send(error);
+                res.status(500).json(error);
             }
         };
     }
