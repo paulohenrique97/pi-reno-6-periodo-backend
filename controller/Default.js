@@ -54,18 +54,14 @@ class DefaultController {
                             count: 0,
                             rows: data,
                         };
-                        model
-                            .count({
-                                where: where,
-                            })
-                            .then((count) => {
-                                registers.count = count;
-                                res.status(200).json(registers);
-                                return;
-                            })
-                            .catch((error) => {
-                                res.status(500).json(error);
-                            });
+                        return model.count({
+                            where: where,
+                        });
+                    })
+                    .then((count) => {
+                        registers.count = count;
+                        res.status(200).json(registers);
+                        return;
                     })
                     .catch((error) => {
                         res.status(500).json(error);
