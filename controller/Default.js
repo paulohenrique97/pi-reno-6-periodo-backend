@@ -40,7 +40,7 @@ class DefaultController {
                 }
                 let registers = {
                     count: 0,
-                    rows: data,
+                    rows: [],
                 };
                 model
                     .scope(scope)
@@ -54,6 +54,8 @@ class DefaultController {
                             res.status(404).end();
                             return;
                         }
+
+                        registers.rows = data;
 
                         return model.count({
                             where: where,
